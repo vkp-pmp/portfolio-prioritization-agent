@@ -62,6 +62,17 @@ portfolio["Priority Score"] = (
 ) * 10
 
 portfolio["Priority Score"] = portfolio["Priority Score"].round(1)
+def recommend(row):
+    if row["Risk"] >= 8:
+        return "LEADERSHIP REVIEW"
+    elif row["Priority Score"] >= 75:
+        return "PRIORITIZE"
+    elif row["Priority Score"] >= 60:
+        return "SEQUENCE"
+    else:
+        return "DEFER"
+
+portfolio["Recommendation"] = portfolio.apply(recommend, axis=1)
 
 prioritized_portfolio = portfolio.sort_values(
     "Priority Score",
