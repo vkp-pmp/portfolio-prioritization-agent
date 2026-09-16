@@ -21,4 +21,8 @@ portfolio = pd.DataFrame(data)
 
 st.subheader("Portfolio Initiatives")
 
-st.dataframe(portfolio)
+portfolio = st.data_editor(
+    portfolio,
+    num_rows="dynamic",
+    use_container_width=True
+)
