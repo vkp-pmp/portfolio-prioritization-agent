@@ -24,7 +24,34 @@ st.subheader("Portfolio Initiatives")
 portfolio = st.data_editor(
     portfolio,
     num_rows="dynamic",
-    use_container_width=True
+    use_container_width=True,
+    column_config={
+        "Business Value": st.column_config.NumberColumn(
+            min_value=1,
+            max_value=10,
+            step=1
+        ),
+        "Strategic Alignment": st.column_config.NumberColumn(
+            min_value=1,
+            max_value=10,
+            step=1
+        ),
+        "Urgency": st.column_config.NumberColumn(
+            min_value=1,
+            max_value=10,
+            step=1
+        ),
+        "Effort": st.column_config.NumberColumn(
+            min_value=1,
+            max_value=10,
+            step=1
+        ),
+        "Risk": st.column_config.NumberColumn(
+            min_value=1,
+            max_value=10,
+            step=1
+        )
+    }
 )
 portfolio["Priority Score"] = (
     portfolio["Business Value"] * 0.30
