@@ -26,3 +26,24 @@ portfolio = st.data_editor(
     num_rows="dynamic",
     use_container_width=True
 )
+portfolio["Priority Score"] = (
+    portfolio["Business Value"] * 0.30
+    + portfolio["Strategic Alignment"] * 0.30
+    + portfolio["Urgency"] * 0.20
+    + (11 - portfolio["Effort"]) * 0.10
+    + (11 - portfolio["Risk"]) * 0.10
+) * 10
+
+portfolio["Priority Score"] = portfolio["Priority Score"].round(1)
+
+prioritized_portfolio = portfolio.sort_values(
+    "Priority Score",
+    ascending=False
+)
+
+st.subheader("Prioritized Portfolio")
+
+st.dataframe(
+    prioritized_portfolio,
+    use_container_width=True
+)
