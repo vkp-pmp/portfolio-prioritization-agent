@@ -73,7 +73,30 @@ def recommend(row):
         return "DEFER"
 
 portfolio["Recommendation"] = portfolio.apply(recommend, axis=1)
+def explain(row):
+    reasons = []
 
+    if row["Business Value"] >= 8:
+        reasons.append("high business value")
+
+    if row["Strategic Alignment"] >= 8:
+        reasons.append("strong strategic alignment")
+
+    if row["Urgency"] >= 8:
+        reasons.append("high urgency")
+
+    if row["Effort"] >= 8:
+        reasons.append("high effort")
+
+    if row["Risk"] >= 8:
+        reasons.append("high risk")
+
+    if len(reasons) == 0:
+        return "Moderate across the current portfolio criteria."
+
+    return ", ".join(reasons).capitalize() + "."
+
+portfolio["Why"] = portfolio.apply(explain, axis=1)
 prioritized_portfolio = portfolio.sort_values(
     "Priority Score",
     ascending=False
